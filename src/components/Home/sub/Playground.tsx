@@ -78,14 +78,16 @@ function Playground() {
 
   function handleField(_e: React.SyntheticEvent, newVal: string | null) {
     if (!newVal || newVal == "") return;
-    if (propertyValueRef.current) {
-      propertyValueRef.current.value = "";
-    }
+
     setCurrentProperty(newVal);
     if (booleanProps.includes(newVal)) {
       setRadio(true);
     } else {
       setRadio(false);
+    }
+    if (propertyValueRef.current) {
+      console.log(propertyValueRef.current.value);
+      propertyValueRef.current.value = "";
     }
   }
 
@@ -250,6 +252,7 @@ function Playground() {
               />
               {radio ? (
                 <RadioGroup
+                  ref={propertyValueRef}
                   sx={{
                     paddingX: 2,
                     borderRadius: 2.5,
