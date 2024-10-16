@@ -12,6 +12,7 @@ import {
   ListItemText,
   Stack,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { paletteMenu, paletteObj } from "../../../theme/palette";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -26,6 +27,7 @@ import RenderPalette from "../../Palette/RenderPalette";
 import { resetPalette, updatePalette } from "../../../store/slices/themeSlice";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { model } from "../../../gemini/gemini";
+import { useTranslation } from "react-i18next";
 
 interface colorVariant {
   dark: string;
@@ -36,6 +38,8 @@ function PaletteDialog() {
   const [outputStatus, setOutputStatus] = useState(false);
 
   const dialogData = useAppSelector((state) => state.dialogSlice);
+  const palette = useAppSelector((state) => state.themeSlice.palette);
+  const { t } = useTranslation();
   const inputRefs = useRef<
     Array<{ menu: string; submenu: string; el: HTMLDivElement; index: number; i: number }>
   >([]);
@@ -129,7 +133,7 @@ function PaletteDialog() {
           justifyContent={"space-between"}
           sx={{ backgroundColor: "white" }}
         >
-          <DialogTitle>palette</DialogTitle>
+          <DialogTitle>{t("palette")}</DialogTitle>
           <IconButton onClick={closeDialog}>
             <CancelIcon />
           </IconButton>
@@ -149,7 +153,7 @@ function PaletteDialog() {
                 <ListItemIcon>
                   <ExpandMoreIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>{menu}</ListItemText>
+                <ListItemText>{t(menu)}</ListItemText>
               </ListItem>
 
               {paletteObj[menu].map((submenu: string, index: number) => (
@@ -157,10 +161,10 @@ function PaletteDialog() {
                   <ListItem key={index} sx={{ paddingX: 20 }}>
                     <ListItemText>
                       {
-                        <span style={{ marginRight: "5em" }}>
-                          {submenu}
+                        <Typography>
+                          {t(submenu)}
                           <strong>:</strong>
-                        </span>
+                        </Typography>
                       }{" "}
                       <InputBase
                         type={
@@ -188,6 +192,7 @@ function PaletteDialog() {
                           })
                         }
                         id={submenu}
+                        defaultValue={palette[menu][submenu]}
                         onChange={(event) => handlePaletteChange(event, menu, i)}
                         placeholder="Enter value..."
                         sx={{
@@ -209,7 +214,7 @@ function PaletteDialog() {
           <ListItem>
             <Box width={"100%"} display={"flex"} justifyContent={"end"}>
               <Button onClick={showPalette} variant="contained" startIcon={<ColorLensIcon />}>
-                generate theme
+                {t("generateTheme")}
               </Button>
             </Box>
           </ListItem>

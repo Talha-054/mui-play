@@ -35,6 +35,7 @@ import "react-toastify/dist/ReactToastify.css";
 import RenderSx from "./RenderSx";
 import RenderTheme from "./RenderTheme";
 import { toggleDialog } from "../../../store/slices/dialogSlice";
+import { useTranslation } from "react-i18next";
 
 function Playground() {
   const [currProperty, setCurrentProperty] = useState("");
@@ -47,6 +48,8 @@ function Playground() {
   const componentData = useAppSelector((state) => state.componentSlice);
   const dialogData = useAppSelector((state) => state.dialogSlice);
   const dispatch = useAppDispatch();
+
+  const { t } = useTranslation();
 
   let timeoutId: number;
 
@@ -164,22 +167,22 @@ function Playground() {
             }}
             onChange={handleChoice}
           >
-            <FormControlLabel value={"props"} label={"props"} control={<Radio />} />
+            <FormControlLabel value={"props"} label={t("props")} control={<Radio />} />
             <Divider />
-            <FormControlLabel value={"css"} label={"css"} control={<Radio />} />
+            <FormControlLabel value={"css"} label={t("css")} control={<Radio />} />
             <Divider />
             <FormControlLabel
               checked={dialogData.paletteForm}
               value={"palette"}
-              label={"palette"}
+              label={t("palette")}
               control={<Radio />}
             />
             <Divider />
-            <FormControlLabel value={""} label={"test"} control={<Radio />} />
-            <FormControlLabel value={""} label={"test"} control={<Radio />} />
-            <FormControlLabel value={""} label={"test"} control={<Radio />} />
-            <FormControlLabel value={""} label={"test"} control={<Radio />} />
-            <FormControlLabel value={""} label={"test"} control={<Radio />} />
+            <FormControlLabel value={""} label={t("test")} control={<Radio />} />
+            <FormControlLabel value={""} label={t("test")} control={<Radio />} />
+            <FormControlLabel value={""} label={t("test")} control={<Radio />} />
+            <FormControlLabel value={""} label={t("test")} control={<Radio />} />
+            <FormControlLabel value={""} label={t("test")} control={<Radio />} />
           </RadioGroup>
         </Stack>
         <Stack flexGrow={1}></Stack>
@@ -196,7 +199,7 @@ function Playground() {
                 sx={{ borderBottom: "2px solid red" }}
                 gutterBottom
               >
-                {outputStatus == "sx" ? "sx" : "theme"}
+                {outputStatus == "sx" ? "sx" : t("theme")}
               </Typography>
               <IconButton onClick={hideOutputArea}>
                 <CancelIcon />
@@ -238,8 +241,8 @@ function Playground() {
                 size="small"
                 renderInput={(params) => (
                   <TextField
-                    label={styles ? "css" : "props"}
-                    placeholder={styles ? "search css " : "search props..."}
+                    label={styles ? t("css") : t("props")}
+                    placeholder={styles ? t("searchCss") : t("searchProps")}
                     {...params}
                   />
                 )}
@@ -264,15 +267,15 @@ function Playground() {
                   <FormControlLabel
                     sx={{ mr: 8 }}
                     value={"true"}
-                    label={"true"}
+                    label={t("true")}
                     control={<Radio />}
                   />
-                  <FormControlLabel value={"false"} label={"false"} control={<Radio />} />
+                  <FormControlLabel value={"false"} label={t("false")} control={<Radio />} />
                 </RadioGroup>
               ) : (
                 <InputBase
                   inputRef={propertyValueRef}
-                  placeholder="Enter value..."
+                  placeholder={t("enterValue")}
                   sx={{
                     width: "250px",
                     height: "40px",

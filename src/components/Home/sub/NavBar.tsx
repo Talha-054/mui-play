@@ -1,4 +1,13 @@
-import { AppBar, IconButton, Autocomplete, TextField, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  IconButton,
+  Autocomplete,
+  TextField,
+  Toolbar,
+  Typography,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
@@ -8,6 +17,10 @@ import {
   updateProps,
   updateStyles,
 } from "../../../store/slices/componentSlice";
+import Fade from "@mui/material/Fade";
+import React from "react";
+import LanguageIcon from "@mui/icons-material/Language";
+import { useTranslation } from "react-i18next";
 
 const muiComponents: String[] = [
   "none",
@@ -37,7 +50,7 @@ const muiComponents: String[] = [
   "Container",
   "Typography",
   "Paper",
-  "Divider",
+  "Boxider",
   "Avatar",
   "Badge",
   "Chip",
@@ -69,6 +82,16 @@ const muiComponents: String[] = [
 function NavBar() {
   const componentData = useAppSelector((state) => state.componentSlice);
   const dispatch = useAppDispatch();
+  const { i18n, t } = useTranslation();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (lngCode: string) => {
+    i18n.changeLanguage(lngCode);
+    setAnchorEl(null);
+  };
 
   function handleCompChange(_e: React.SyntheticEvent<Element, Event>, newVal: String | null) {
     if (!newVal) return;
@@ -90,10 +113,32 @@ function NavBar() {
             <Typography sx={{ ml: 2, flexGrow: 1 }} variant="h6" fontWeight={700}>
               MUI-Play
             </Typography>
+            <Box>
+              <IconButton onClick={handleClick} sx={{ px: 2, color: "black" }}>
+                <LanguageIcon fontSize="large" />
+              </IconButton>
+              <Menu
+                id="fade-menu"
+                MenuListProps={{
+                  "aria-labelledby": "fade-button",
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Fade}
+              >
+                <MenuItem selected={i18n.language == "en"} onClick={() => handleClose("en")}>
+                  {t("english")}
+                </MenuItem>
+                <MenuItem selected={i18n.language == "ja"} onClick={() => handleClose("ja")}>
+                  {t("japnese")}
+                </MenuItem>
+              </Menu>
+            </Box>
             <Autocomplete
               options={muiComponents}
               onChange={(e, newVal) => handleCompChange(e, newVal)}
-              renderInput={(params) => <TextField placeholder="Select component" {...params} />}
+              renderInput={(params) => <TextField placeholder={t("selectComponent")} {...params} />}
               size="small"
               sx={{
                 "&.MuiAutocomplete-root": {

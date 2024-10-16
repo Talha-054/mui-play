@@ -1,4 +1,5 @@
 import Home from "./components/Home/Home";
+import "./utils/i18/i18";
 
 function App() {
   return (

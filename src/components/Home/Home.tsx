@@ -2,7 +2,7 @@ import PaletteDialog from "../Dialogs/paletteDialog/PaletteDialog";
 import Hero from "./sub/Hero";
 import NavBar from "./sub/NavBar";
 import Playground from "./sub/Playground";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 function Home() {

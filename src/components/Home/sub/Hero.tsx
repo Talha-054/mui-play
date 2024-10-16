@@ -4,10 +4,11 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { objToArr } from "../../../utils/helperFunctions/helper";
 import { useEffect } from "react";
 import { jsonToPlainText, Options } from "json-to-plain-text";
+import { useTranslation } from "react-i18next";
 
 function Hero() {
   const componentData = useAppSelector((state) => state.componentSlice);
-
+  const { t } = useTranslation();
   const options: Options = {
     color: true, // Whether to apply colors to the output or not
     spacing: true, // Whether to include spacing before colons or not
@@ -50,7 +51,7 @@ function Hero() {
             borderRight={"1px solid white"}
           >
             <Typography variant="h6" sx={{ borderBottom: "2px solid red" }} gutterBottom>
-              props
+              {t("props")}
             </Typography>
             <Box
               display={"flex"}
@@ -79,7 +80,7 @@ function Hero() {
             flexGrow={1}
           >
             <Typography variant="h6" sx={{ borderBottom: "2px solid red" }} gutterBottom>
-              css
+              {t("css")}
             </Typography>
             <Box
               display={"flex"}
