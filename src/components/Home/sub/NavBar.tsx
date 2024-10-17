@@ -24,6 +24,7 @@ import { useTranslation } from "react-i18next";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { toggleMode } from "../../../store/slices/themeSlice";
+import { useTheme } from "@mui/material/styles";
 
 const muiComponents: String[] = [
   "none",
@@ -85,7 +86,7 @@ const muiComponents: String[] = [
 function NavBar() {
   const componentData = useAppSelector((state) => state.componentSlice);
   const mode = useAppSelector((state) => state.themeSlice.palette.mode);
-
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const { i18n, t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -94,9 +95,11 @@ function NavBar() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (lngCode: string) => {
-    i18n.changeLanguage(lngCode);
+  const handleClose = (_e: React.MouseEvent, lngCode: string) => {
     setAnchorEl(null);
+    if (lngCode) {
+      i18n.changeLanguage(lngCode);
+    }
   };
 
   function handleCompChange(_e: React.SyntheticEvent<Element, Event>, newVal: String | null) {
@@ -120,11 +123,18 @@ function NavBar() {
             <IconButton size="large" color="inherit">
               <MenuIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flexGrow: 1 }} variant="h6" fontWeight={700}>
+            <Typography
+              sx={{
+                ml: 2,
+                flexGrow: 1,
+              }}
+              variant="h6"
+              fontWeight={700}
+            >
               MUI-Play
             </Typography>
             <Box>
-              <IconButton onClick={handleClick} sx={{ px: 2, color: "black" }}>
+              <IconButton onClick={handleClick} sx={{ color: theme.palette.text.secondary }}>
                 <LanguageIcon fontSize="large" />
               </IconButton>
 
@@ -142,10 +152,10 @@ function NavBar() {
                 onClose={handleClose}
                 TransitionComponent={Fade}
               >
-                <MenuItem selected={i18n.language == "en"} onClick={() => handleClose("en")}>
+                <MenuItem selected={i18n.language == "en"} onClick={(e) => handleClose(e, "en")}>
                   {t("english")}
                 </MenuItem>
-                <MenuItem selected={i18n.language == "ja"} onClick={() => handleClose("ja")}>
+                <MenuItem selected={i18n.language == "ja"} onClick={(e) => handleClose(e, "ja")}>
                   {t("japnese")}
                 </MenuItem>
               </Menu>

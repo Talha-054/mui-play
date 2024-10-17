@@ -77,6 +77,7 @@ function Playground() {
     } else {
       e.target.value == "css" ? setStyles(true) : setStyles(false);
     }
+    setCurrentProperty("");
   }
 
   function handleField(_e: React.SyntheticEvent, newVal: string | null) {

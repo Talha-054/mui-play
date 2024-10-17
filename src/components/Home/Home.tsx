@@ -11,8 +11,6 @@ function Home() {
 
   const theme = useTheme();
 
-  console.log(theme);
-
   return (
     <>
       <Box
