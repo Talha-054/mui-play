@@ -150,8 +150,6 @@ function Playground() {
         elevation={5}
         sx={{
           display: "flex",
-          background:
-            "radial-gradient(circle at 10% 20%, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 0%, rgb(215, 223, 252) 84%)",
           flexGrow: 1,
           padding: "20px",
           justifyContent: "space-between",

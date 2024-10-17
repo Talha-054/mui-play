@@ -21,6 +21,9 @@ import Fade from "@mui/material/Fade";
 import React from "react";
 import LanguageIcon from "@mui/icons-material/Language";
 import { useTranslation } from "react-i18next";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { toggleMode } from "../../../store/slices/themeSlice";
 
 const muiComponents: String[] = [
   "none",
@@ -81,10 +84,13 @@ const muiComponents: String[] = [
 
 function NavBar() {
   const componentData = useAppSelector((state) => state.componentSlice);
+  const mode = useAppSelector((state) => state.themeSlice.palette.mode);
+
   const dispatch = useAppDispatch();
   const { i18n, t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -102,6 +108,10 @@ function NavBar() {
     console.log(componentData);
   }
 
+  function switchMode() {
+    dispatch(toggleMode());
+  }
+
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -117,6 +127,11 @@ function NavBar() {
               <IconButton onClick={handleClick} sx={{ px: 2, color: "black" }}>
                 <LanguageIcon fontSize="large" />
               </IconButton>
+
+              <IconButton onClick={switchMode}>
+                {mode == "light" ? <DarkModeIcon /> : <LightModeIcon />}
+              </IconButton>
+
               <Menu
                 id="fade-menu"
                 MenuListProps={{
@@ -141,9 +156,8 @@ function NavBar() {
               renderInput={(params) => <TextField placeholder={t("selectComponent")} {...params} />}
               size="small"
               sx={{
+                ml: 3,
                 "&.MuiAutocomplete-root": {
-                  backgroundColor: "white",
-
                   minWidth: "250px",
                   borderRadius: "5px",
                 },

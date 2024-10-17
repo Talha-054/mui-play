@@ -131,7 +131,6 @@ function PaletteDialog() {
           position={"sticky"}
           top={"0px"}
           justifyContent={"space-between"}
-          sx={{ backgroundColor: "white" }}
         >
           <DialogTitle>{t("palette")}</DialogTitle>
           <IconButton onClick={closeDialog}>
@@ -141,12 +140,7 @@ function PaletteDialog() {
 
         <Divider />
 
-        <List
-          sx={{
-            background:
-              "radial-gradient(circle at 10% 20%, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 0%, rgb(215, 223, 252) 84%)",
-          }}
-        >
+        <List>
           {paletteMenu.map((menu: string, i: number) => (
             <>
               <ListItem key={i}>
@@ -220,15 +214,7 @@ function PaletteDialog() {
           </ListItem>
         </List>
         {outputStatus && (
-          <Stack
-            sx={{
-              background:
-                "linear-gradient(to bottom, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 20%,rgb(215, 223, 252) 60%)",
-            }}
-            padding={5}
-            display={"flex"}
-            flexGrow={1}
-          >
+          <Stack padding={5} display={"flex"} flexGrow={1}>
             <Box display={"flex"} width={"100%"} justifyContent={"end"}>
               <Tooltip title={"reset to default"}>
                 <IconButton onClick={clearPalette}>

@@ -52,7 +52,7 @@ interface initialStateType {
 const initialState: initialStateType = {
       palette: {
      
-            mode: "light",
+            mode: "dark",
             common: {
                   black: "#000",
                   white: "#fff"
@@ -131,6 +131,14 @@ export const themeSlice = createSlice({
                         state.palette[payload.property].dark = payload.dark 
                   }    
             },
+            toggleMode: (state)=>{
+                  if (state.palette.mode == "light"){
+                        state.palette.mode = "dark"
+                  } else if (state.palette.mode =="dark"){
+                        state.palette.mode= "light"
+                  }
+                  
+            },
             resetPalette: (state)=>{
                   console.log("clearing palette")
                   console.log(initialState)
@@ -139,6 +147,6 @@ export const themeSlice = createSlice({
       }
 })
 
-export const {updatePalette, resetPalette} = themeSlice.actions
+export const {updatePalette, resetPalette, toggleMode} = themeSlice.actions
 
 export const themeReducer = themeSlice.reducer

@@ -1,5 +1,6 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import heroImg from "../../../assets/hero1.png";
+import heroImgDark from "../../../assets/hero1-dark.jpg";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { objToArr } from "../../../utils/helperFunctions/helper";
 import { useEffect } from "react";
@@ -8,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 function Hero() {
   const componentData = useAppSelector((state) => state.componentSlice);
+  const mode = useAppSelector((state) => state.themeSlice.palette.mode);
   const { t } = useTranslation();
   const options: Options = {
     color: true, // Whether to apply colors to the output or not
@@ -36,7 +38,7 @@ function Hero() {
         <Box
           sx={{
             flexGrow: 1,
-            backgroundImage: `url(${heroImg})`,
+            backgroundImage: `${mode == "light" ? heroImg : heroImgDark}`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "contain",
           }}
