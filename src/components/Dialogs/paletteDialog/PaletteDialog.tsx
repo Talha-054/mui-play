@@ -30,7 +30,6 @@ import { model } from "../../../gemini/gemini";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
-import DoneIcon from "@mui/icons-material/Done";
 
 interface colorVariant {
   dark: string;
