@@ -12,6 +12,9 @@ export const darkTheme = createTheme({
 
 
 export const lightTheme = createTheme({
-      
+      palette: {
+            mode: "light",
+            
+      }
 })
 

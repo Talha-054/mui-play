@@ -10,10 +10,10 @@ function RenderPalette() {
   return (
     <>
       <span>palette : {"{"}</span>
-      <span style={{ paddingLeft: "20px" }}>mode: {palette.mode}</span>
+      <span style={{ paddingLeft: "20px" }}>mode: "{palette.mode}",</span>
       {paletteMenu.map((paletteProperty: string, index: number) => (
         <>
-          {paletteProperty != "mode" && (
+          {palette[paletteProperty] && paletteProperty != "mode" && (
             <>
               <span key={paletteProperty} style={{ paddingLeft: "20px" }}>
                 {paletteProperty}: {"{"}
@@ -33,7 +33,7 @@ function RenderPalette() {
                   </>
                 ))}
               </span>
-              <span style={{ paddingLeft: "20px" }}>{"}"}</span>
+              <span style={{ paddingLeft: "20px" }}>{"},"}</span>
             </>
           )}
         </>

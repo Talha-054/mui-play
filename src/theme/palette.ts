@@ -5,7 +5,7 @@ import { ObjOfStrings } from "../types/common"
 
 
 export const paletteObj: ObjOfStrings = {
-      mode: ["mode"],
+      // mode: ["mode"],
       common: ["black", "white"],
       primary: ["main", "light", "dark", "contrastText"],
       secondary: ["main", "light", "dark", "contrastText"],
@@ -21,7 +21,7 @@ export const paletteObj: ObjOfStrings = {
 }
 
 export const paletteMenu = [
-      "mode", "common", "primary", "secondary", "error", "warning", "info", "success", "text", "divider", "background", "action"
+      "common", "primary", "secondary", "error", "warning", "info", "success", "text", "divider", "background", "action"
 ]
 
 

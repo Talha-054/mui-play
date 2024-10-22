@@ -118,7 +118,13 @@ function NavBar() {
   return (
     <>
       <Box sx={{ display: "flex" }}>
-        <AppBar sx={{ position: "sticky", top: "0px" }}>
+        <AppBar
+          color="transparent"
+          sx={{
+            position: "sticky",
+            top: "0px",
+          }}
+        >
           <Toolbar>
             <IconButton size="large" color="inherit">
               <MenuIcon />
@@ -127,6 +133,7 @@ function NavBar() {
               sx={{
                 ml: 2,
                 flexGrow: 1,
+                color: theme.palette.text.secondary,
               }}
               variant="h6"
               fontWeight={700}
@@ -134,7 +141,7 @@ function NavBar() {
               MUI-Play
             </Typography>
             <Box>
-              <IconButton onClick={handleClick} sx={{ color: theme.palette.text.secondary }}>
+              <IconButton onClick={handleClick}>
                 <LanguageIcon fontSize="large" />
               </IconButton>
 

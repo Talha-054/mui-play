@@ -12,7 +12,7 @@ interface Palette {
           light: string;
           dark: string;
           contrastText: string;
-      } | string;
+      } ;
       secondary: {
           main: string;
           light: string;
@@ -98,7 +98,9 @@ const initialState: initialStateType = {
                   secondary: "rgba(0, 0, 0, 0.6)",
                   disabled: "rgba(0, 0, 0, 0.38)"
             },
-            divider : "rgba(0, 0, 0, 0.12)",
+            divider : { 
+                  divider: "rgba(0, 0, 0, 0.12)"
+            },
             background: {
                   paper: "#fff",
                   default: "#fff"
@@ -131,6 +133,9 @@ export const themeSlice = createSlice({
                         state.palette[payload.property].dark = payload.dark 
                   }    
             },
+            addCustomField: (state, {payload})=>{
+                  state.palette[payload.name] = {...state.palette.primary}
+            },
             toggleMode: (state)=>{
                   if (state.palette.mode == "light"){
                         state.palette.mode = "dark"
@@ -147,6 +152,6 @@ export const themeSlice = createSlice({
       }
 })
 
-export const {updatePalette, resetPalette, toggleMode} = themeSlice.actions
+export const {updatePalette, resetPalette, toggleMode, addCustomField} = themeSlice.actions
 
 export const themeReducer = themeSlice.reducer

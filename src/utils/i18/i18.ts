@@ -11,7 +11,7 @@ i18next.use(LanguageDetector).use(initReactI18next).init({
             en : {
                   translation :{
                         "props": "Props",
-                        "css" : "CSS",
+                        "css" : "sx",
                         "palette": "Palette",
                         "test": "test",
                         "searchCss": "search css",
@@ -104,10 +104,6 @@ i18next.use(LanguageDetector).use(initReactI18next).init({
                         "focusOpacity": "フォーカス不透明度",
                         "activatedOpacity": "アクティブ化された不透明度",
                         "theme": "テーマ"
-
-
-
-
                   }
             }
       }
