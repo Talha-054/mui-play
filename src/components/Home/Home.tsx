@@ -5,6 +5,7 @@ import Playground from "./sub/Playground";
 import { Box } from "@mui/material";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useTheme } from "@mui/material/styles";
+import ChatDialog from "../Dialogs/chatDialog/ChatDialog";
 
 function Home() {
   const dialogData = useAppSelector((state) => state.dialogSlice);
@@ -30,6 +31,7 @@ function Home() {
         <Playground />
       </Box>
       {dialogData.paletteForm && <PaletteDialog />}
+      <ChatDialog />
     </>
   );
 }

@@ -126,7 +126,7 @@ function NavBar() {
           }}
         >
           <Toolbar>
-            <IconButton size="large" color="inherit">
+            <IconButton size="large">
               <MenuIcon />
             </IconButton>
             <Typography

@@ -48,6 +48,7 @@ function Playground() {
   const componentData = useAppSelector((state) => state.componentSlice);
   const dialogData = useAppSelector((state) => state.dialogSlice);
   const dispatch = useAppDispatch();
+  const chatDialogStatus = useAppSelector((state) => state.dialogSlice.chatDialog);
 
   const { t } = useTranslation();
 
@@ -170,11 +171,20 @@ function Playground() {
             <Divider />
             <FormControlLabel value={"css"} label={t("css")} control={<Radio />} />
             <Divider />
+
             <FormControlLabel
               checked={dialogData.paletteForm}
               value={"palette"}
               label={t("palette")}
               control={<Radio />}
+            />
+            <Divider />
+            <FormControlLabel
+              onClick={() => dispatch(toggleDialog({ name: "chatDialog", visible: true }))}
+              value={"chatBox"}
+              label={t("chatBox")}
+              control={<Radio />}
+              checked={chatDialogStatus}
             />
             <Divider />
             <FormControlLabel value={""} label={t("test")} control={<Radio />} />

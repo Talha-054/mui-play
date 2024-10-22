@@ -26,7 +26,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import RenderPalette from "../../Palette/RenderPalette";
 import { resetPalette, updatePalette, addCustomField } from "../../../store/slices/themeSlice";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import { model } from "../../../gemini/gemini";
+import { modelJson } from "../../../gemini/gemini";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
@@ -76,7 +76,7 @@ function PaletteDialog() {
         (async () => {
           console.log("func fired ");
 
-          const result = await model.generateContent(lightDarkPrompt);
+          const result = await modelJson.generateContent(lightDarkPrompt);
           let colorVariant: colorVariant = JSON.parse(result.response.text());
 
           dispatch(

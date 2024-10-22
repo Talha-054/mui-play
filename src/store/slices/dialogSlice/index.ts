@@ -11,10 +11,12 @@ interface ToggleDialogAction {
 interface dialogSliceInitialState {
   [key: string]: boolean;
   paletteForm: boolean;
+  chatDialog: boolean
   
 }
 const initialState: dialogSliceInitialState = {
   paletteForm: false,
+  chatDialog: false
 };
 const dialogSlice = createSlice({
   name: "dialog",
