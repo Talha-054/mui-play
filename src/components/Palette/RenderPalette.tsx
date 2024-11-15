@@ -16,7 +16,7 @@ function RenderPalette() {
           {palette[paletteProperty] && paletteProperty != "mode" && (
             <>
               <span key={paletteProperty} style={{ paddingLeft: "20px" }}>
-                {paletteProperty}: {"{"}
+                {paletteProperty.toUpperCase()}: {"{"}
               </span>
               <span key={index}>
                 {paletteObj[paletteProperty].map((subProperty: string, i: number) => (

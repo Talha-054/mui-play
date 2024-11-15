@@ -148,7 +148,7 @@ function PaletteDialog() {
 
   return (
     <>
-      <Dialog open={dialogData.paletteForm}>
+      <Dialog fullScreen open={dialogData.paletteForm}>
         <Box
           display={"flex"}
           zIndex={100}
@@ -165,99 +165,101 @@ function PaletteDialog() {
 
         <Divider />
 
-        <List>
-          <ListItem>
-            <ListItemIcon onClick={() => setAddNewFieldStatus(true)}>
-              <AddIcon />
-            </ListItemIcon>
-          </ListItem>
+        <Box sx={{display: "flex", justifyContent:"center", alignItems: "center"}}>
+          <List>
+            <ListItem>
+              <ListItemIcon onClick={() => setAddNewFieldStatus(true)}>
+                <AddIcon />
+              </ListItemIcon>
+            </ListItem>
 
-          {addNewFieldStatus && (
-            <>
-              <ListItem>
-                <ListItemIcon>
-                  <ExpandMoreIcon fontSize="small" />
-                </ListItemIcon>
-                <InputBase placeholder="field name" onChange={handleNewField} />
-              </ListItem>
-            </>
-          )}
+            {addNewFieldStatus && (
+              <>
+                <ListItem>
+                  <ListItemIcon>
+                    <ExpandMoreIcon fontSize="small" />
+                  </ListItemIcon>
+                  <InputBase placeholder="field name" onChange={handleNewField} />
+                </ListItem>
+              </>
+            )}
 
-          {paletteMenu.map(
-            (menu: string, i: number) =>
-              palette[menu] && (
-                <>
-                  <ListItem key={i}>
-                    <ListItemIcon>
-                      <ExpandMoreIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>{t(menu)}</ListItemText>
-                  </ListItem>
+            {paletteMenu.map(
+              (menu: string, i: number) =>
+                palette[menu] && (
+                  <>
+                    <ListItem key={i}>
+                      <ListItemIcon>
+                        <ExpandMoreIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText>{t(menu)}</ListItemText>
+                    </ListItem>
 
-                  {paletteObj[menu]?.map((submenu: string, index: number) => (
-                    <>
-                      <ListItem key={index} sx={{ px: 20 }}>
-                        <ListItemText>
-                          {
-                            <Typography>
-                              {t(submenu)}
-                              <strong>:</strong>
-                            </Typography>
-                          }{" "}
-                          <InputBase
-                            type={
-                              ["mode", "action"].includes(menu)
-                                ? [
-                                    "active",
-                                    "hover",
-                                    "selected",
-                                    "selectedOpacity",
-                                    "disabled",
-                                    "disabledBackground",
-                                    "focus",
-                                  ].includes(submenu)
-                                  ? "color"
-                                  : ""
-                                : "color"
-                            }
-                            inputRef={(el) =>
-                              (inputRefs.current[indexCounter++] = {
-                                menu: menu,
-                                submenu: submenu,
-                                el: el,
-                                i: i,
-                                index: index,
-                              })
-                            }
-                            id={submenu}
-                            // defaultValue={palette[menu][submenu] || ""}
-                            onChange={(event) => handlePaletteChange(event, menu, i)}
-                            placeholder="Enter value..."
-                            sx={{
-                              borderRadius: "5px",
-                              paddingX: "10px",
-                              marginTop: "2.5px",
-                              width: "150px",
-                              height: "50px",
-                              border: "1px solid #c4b68d",
-                            }}
-                          />
-                          {/* <Skeleton ref={inputRefs.current[indexCounter-1]}  variant="rectangular" height={40} width={150} animation={"wave"} /> */}
-                        </ListItemText>
-                      </ListItem>
-                    </>
-                  ))}
-                </>
-              )
-          )}
-          <ListItem>
-            <Box width={"100%"} display={"flex"} justifyContent={"end"}>
-              <Button onClick={showPalette} variant="contained" startIcon={<ColorLensIcon />}>
-                {t("generateTheme")}
-              </Button>
-            </Box>
-          </ListItem>
-        </List>
+                    {paletteObj[menu]?.map((submenu: string, index: number) => (
+                      <>
+                        <ListItem key={index} sx={{ px: 20 }}>
+                          <ListItemText>
+                            {
+                              <Typography>
+                                {t(submenu)}
+                                <strong>:</strong>
+                              </Typography>
+                            }{" "}
+                            <InputBase
+                              type={
+                                ["mode", "action"].includes(menu)
+                                  ? [
+                                      "active",
+                                      "hover",
+                                      "selected",
+                                      "selectedOpacity",
+                                      "disabled",
+                                      "disabledBackground",
+                                      "focus",
+                                    ].includes(submenu)
+                                    ? "color"
+                                    : ""
+                                  : "color"
+                              }
+                              inputRef={(el) =>
+                                (inputRefs.current[indexCounter++] = {
+                                  menu: menu,
+                                  submenu: submenu,
+                                  el: el,
+                                  i: i,
+                                  index: index,
+                                })
+                              }
+                              id={submenu}
+                              // defaultValue={palette[menu][submenu] || ""}
+                              onChange={(event) => handlePaletteChange(event, menu, i)}
+                              placeholder="Enter value..."
+                              sx={{
+                                borderRadius: "5px",
+                                paddingX: "10px",
+                                marginTop: "2.5px",
+                                width: "150px",
+                                height: "50px",
+                                border: "1px solid #c4b68d",
+                              }}
+                            />
+                            {/* <Skeleton ref={inputRefs.current[indexCounter-1]}  variant="rectangular" height={40} width={150} animation={"wave"} /> */}
+                          </ListItemText>
+                        </ListItem>
+                      </>
+                    ))}
+                  </>
+                )
+            )}
+            <ListItem>
+              <Box width={"100%"} display={"flex"} justifyContent={"center"} py={5}>
+                <Button onClick={showPalette} variant="contained" startIcon={<ColorLensIcon />}>
+                  {t("generateTheme")}
+                </Button>
+              </Box>
+            </ListItem>
+          </List>
+        </Box>
         {outputStatus && (
           <Stack padding={5} display={"flex"} flexGrow={1}>
             <Box display={"flex"} width={"100%"} justifyContent={"end"}>

@@ -90,7 +90,7 @@ function ChatDialog() {
             />
           )}
           {loading && (
-            <Skeleton width={"100%"} variant="rectangular" animation="pulse" height={50} />
+            <Skeleton width={"70%"} sx={{borderRadius: "20px"}} variant="rectangular" animation="pulse" height={50} />
           )}
         </Box>
       </Dialog>
